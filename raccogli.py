@@ -224,7 +224,7 @@ def risolvi_google(url):
     try:
         from googlenewsdecoder import gnewsdecoder
         esito = gnewsdecoder(url, interval=1)
-        if esito.get("status") and esito.get("decoded_url"):
+        if (esito.get("status") or esito.get("success")) and esito.get("decoded_url"):
             return esito["decoded_url"]
         ULTIMO_ERRORE_GOOGLE["msg"] = str(esito.get("message") or esito)[:160]
     except Exception as e:
