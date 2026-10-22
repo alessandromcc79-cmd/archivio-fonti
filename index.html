@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Archivio fonti</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --carta:#f7f4ee; --carta2:#efeae0; --inchiostro:#1d1b18; --grigio:#6b655c; --linea:#d9d2c4;
+  --rosso:#b3261e; --evid:#ffe58a; --card:#fffdf9;
+  --serif:"Source Serif 4",Georgia,serif; --sans:Inter,system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --carta:#161513; --carta2:#201e1b; --inchiostro:#ece7de; --grigio:#a39c90; --linea:#35322d;
+  --rosso:#ff8a80; --evid:#6b5a12; --card:#1d1b18;
+}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--carta);color:var(--inchiostro);font-family:var(--sans);font-size:16px}
+a{color:inherit}
+header{border-bottom:3px double var(--inchiostro);padding:18px 16px 10px;max-width:880px;margin:0 auto}
+.testata{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h1{font-family:var(--serif);font-weight:700;font-size:clamp(28px,6vw,40px);margin:0;letter-spacing:-.01em}
+.agg{font-size:12px;color:var(--grigio)}
+nav.schede{display:flex;gap:4px;margin-top:10px}
+nav.schede button{font:500 13px var(--sans);background:none;border:0;padding:6px 10px;color:var(--grigio);cursor:pointer;border-bottom:2px solid transparent}
+nav.schede button[aria-selected=true]{color:var(--inchiostro);border-color:var(--rosso)}
+main{max-width:880px;margin:0 auto;padding:0 16px 60px}
+.barra{position:sticky;top:0;z-index:5;background:var(--carta);padding:12px 0 8px;border-bottom:1px solid var(--linea)}
+.cerca{width:100%;font:16px var(--sans);padding:11px 14px;border:1px solid var(--linea);border-radius:10px;background:var(--card);color:var(--inchiostro)}
+.cerca:focus{outline:2px solid var(--rosso);outline-offset:1px}
+.sezioni{display:flex;gap:6px;overflow-x:auto;padding:10px 0 4px;scrollbar-width:none}
+.sezioni::-webkit-scrollbar{display:none}
+.chip{flex:none;font:500 13px var(--sans);padding:6px 12px;border:1px solid var(--linea);border-radius:999px;background:var(--card);color:var(--inchiostro);cursor:pointer}
+.chip[aria-pressed=true]{background:var(--inchiostro);color:var(--carta);border-color:var(--inchiostro)}
+.filtri{display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding-top:6px}
+.filtri select{font:13px var(--sans);padding:6px 8px;border:1px solid var(--linea);border-radius:8px;background:var(--card);color:var(--inchiostro);max-width:100%}
+.filtri label{font-size:13px;color:var(--grigio);display:flex;align-items:center;gap:5px}
+.conta{font-size:12px;color:var(--grigio);margin:12px 0 4px}
+.giorno{font:600 12px var(--sans);text-transform:uppercase;letter-spacing:.08em;color:var(--rosso);margin:22px 0 6px}
+article{border-top:1px solid var(--linea);padding:14px 0}
+.meta{font-size:12px;color:var(--grigio);display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.meta .fonte{font-weight:600;color:var(--inchiostro)}
+.badge{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;padding:2px 6px;border-radius:4px;background:var(--carta2);color:var(--grigio)}
+.badge.testo{background:var(--inchiostro);color:var(--carta)}
+h2{font-family:var(--serif);font-weight:600;font-size:20px;line-height:1.25;margin:6px 0;cursor:pointer}
+.som{font-family:var(--serif);font-size:15px;line-height:1.5;color:var(--grigio);margin:4px 0 0}
+.corpo{display:none;margin-top:12px;padding:14px 16px;background:var(--card);border:1px solid var(--linea);border-radius:10px}
+article.aperto .corpo{display:block}
+.corpo .testo{font-family:var(--serif);font-size:16px;line-height:1.65;white-space:pre-wrap}
+.azioni{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.azioni a,.azioni button{font:500 13px var(--sans);padding:7px 12px;border-radius:8px;border:1px solid var(--linea);background:var(--carta);color:var(--inchiostro);text-decoration:none;cursor:pointer}
+.azioni .prima{background:var(--rosso);border-color:var(--rosso);color:#fff}
+mark{background:var(--evid);color:inherit;padding:0 1px}
+.altri{display:block;margin:24px auto 0;font:500 14px var(--sans);padding:10px 18px;border-radius:10px;border:1px solid var(--inchiostro);background:none;color:var(--inchiostro);cursor:pointer}
+.altri[hidden]{display:none}
+article.aperto>.som{display:none}
+.vuoto{padding:40px 0;text-align:center;color:var(--grigio);font-family:var(--serif)}
+table{width:100%;border-collapse:collapse;font-size:13px;margin-top:14px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--linea);vertical-align:top}
+th{font-weight:600;color:var(--grigio);font-size:11px;text-transform:uppercase;letter-spacing:.06em}
+.ok{color:#2e7d32}.err{color:var(--rosso)}
+@media (prefers-color-scheme:dark){.ok{color:#81c784}}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--inchiostro);color:var(--carta);padding:9px 16px;border-radius:8px;font-size:13px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.vis{opacity:1}
+</style>
+</head>
+<body>
+<header>
+  <div class="testata">
+    <h1>Archivio fonti</h1>
+    <span class="agg" id="agg">Caricamento…</span>
+  </div>
+  <nav class="schede" role="tablist">
+    <button role="tab" aria-selected="true" data-vista="archivio">Archivio</button>
+    <button role="tab" aria-selected="false" data-vista="fonti">Stato delle fonti</button>
+  </nav>
+</header>
+
+<main>
+  <section id="vista-archivio">
+    <div class="barra">
+      <input class="cerca" id="q" type="search" placeholder="Cerca: es. ospedale Iglesias, delibera, nome di un consigliere…" autocomplete="off">
+      <div class="sezioni" id="sezioni"></div>
+      <div class="filtri">
+        <select id="fonte" aria-label="Fonte"><option value="">Tutte le fonti</option></select>
+        <select id="periodo" aria-label="Periodo">
+          <option value="0">Qualsiasi data</option>
+          <option value="1">Ultime 24 ore</option>
+          <option value="7">Ultimi 7 giorni</option>
+          <option value="30">Ultimi 30 giorni</option>
+          <option value="365">Ultimo anno</option>
+        </select>
+        <label><input type="checkbox" id="soloTesto"> Solo con testo completo</label>
+      </div>
+    </div>
+    <div class="conta" id="conta"></div>
+    <div id="lista"></div>
+    <button class="altri" id="altri" hidden>Mostra altre</button>
+  </section>
+
+  <section id="vista-fonti" hidden>
+    <p class="conta">Ultimo controllo di ogni fonte. Se una fonte risulta in errore per giorni, probabilmente il sito è cambiato: va corretta in <code>fonti.yaml</code>.</p>
+    <div id="tabella"></div>
+  </section>
+</main>
+<div class="toast" id="toast"></div>
+
+<script>
+const PAGINA = 40;
+let tutte = [], filtrate = [], mostrate = 0, sezione = "", stato = null;
+const $ = id => document.getElementById(id);
+
+const norm = s => (s || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+const esc = s => (s || "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmtData = iso => {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return isNaN(d) ? "" : d.toLocaleDateString("it-IT", {day:"numeric", month:"short", year:"numeric"});
+};
+const fmtOra = iso => { const d = new Date(iso); return isNaN(d) ? "" : d.toLocaleString("it-IT", {day:"numeric", month:"short", hour:"2-digit", minute:"2-digit"}); };
+const chiaveGiorno = iso => { const d = new Date(iso); return isNaN(d) ? "Senza data" : d.toLocaleDateString("it-IT", {weekday:"long", day:"numeric", month:"long", year:"numeric"}); };
+
+function evidenzia(testo, parole) {
+  let html = esc(testo);
+  if (!parole.length) return html;
+  // evidenzia sul testo normalizzato mantenendo gli originali
+  const n = norm(testo);
+  const intervalli = [];
+  parole.forEach(p => {
+    let i = 0;
+    while ((i = n.indexOf(p, i)) !== -1) { intervalli.push([i, i + p.length]); i += p.length; }
+  });
+  if (!intervalli.length) return html;
+  intervalli.sort((a, b) => a[0] - b[0]);
+  let out = "", pos = 0;
+  intervalli.forEach(([a, b]) => {
+    if (a < pos) return;
+    out += esc(testo.slice(pos, a)) + "<mark>" + esc(testo.slice(a, b)) + "</mark>";
+    pos = b;
+  });
+  return out + esc(testo.slice(pos));
+}
+
+function toast(msg) {
+  const t = $("toast"); t.textContent = msg; t.classList.add("vis");
+  clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove("vis"), 1600);
+}
+
+async function copia(testo) {
+  try { await navigator.clipboard.writeText(testo); toast("Copiato"); }
+  catch { toast("Copia non riuscita"); }
+}
+
+function filtra() {
+  const parole = norm($("q").value).split(/\s+/).filter(Boolean);
+  const fonte = $("fonte").value;
+  const giorni = +$("periodo").value;
+  const limite = giorni ? Date.now() - giorni * 864e5 : 0;
+  const soloTesto = $("soloTesto").checked;
+  filtrate = tutte.filter(v => {
+    if (sezione && v.sezione !== sezione) return false;
+    if (fonte && v.fonte !== fonte) return false;
+    if (soloTesto && !v.testo) return false;
+    if (limite && new Date(v.data).getTime() < limite) return false;
+    if (parole.length) {
+      const pagliaio = v._cerca || (v._cerca = norm([v.titolo, v.sommario, v.testo, v.fonte, v.testata].join(" ")));
+      return parole.every(p => pagliaio.includes(p));
+    }
+    return true;
+  });
+  mostrate = 0;
+  $("lista").innerHTML = "";
+  $("conta").textContent = filtrate.length === 1 ? "1 voce" : `${filtrate.length.toLocaleString("it-IT")} voci`;
+  if (!filtrate.length) $("lista").innerHTML = `<p class="vuoto">${tutte.length ? "Nessuna voce con questi filtri." : "L'archivio è ancora vuoto: si riempirà al primo giro dei raccoglitori."}</p>`;
+  altre();
+}
+
+function altre() {
+  const parole = norm($("q").value).split(/\s+/).filter(Boolean);
+  const frag = document.createDocumentFragment();
+  let ultimoGiorno = mostrate ? chiaveGiorno(filtrate[mostrate - 1].data) : null;
+  filtrate.slice(mostrate, mostrate + PAGINA).forEach(v => {
+    const g = chiaveGiorno(v.data);
+    if (g !== ultimoGiorno) {
+      const h = document.createElement("div"); h.className = "giorno"; h.textContent = g;
+      frag.appendChild(h); ultimoGiorno = g;
+    }
+    const a = document.createElement("article");
+    const testata = v.testata && v.testata !== v.fonte ? ` · ${esc(v.testata)}` : "";
+    a.innerHTML = `
+      <div class="meta"><span class="fonte">${esc(v.fonte)}</span>${testata}
+        <span>${v.data_stimata ? "raccolto il " : ""}${fmtData(v.data)}</span>
+        <span class="badge">${esc(v.sezione)}</span>${v.testo ? '<span class="badge testo">testo</span>' : ""}</div>
+      <h2>${evidenzia(v.titolo, parole)}</h2>
+      ${v.sommario ? `<p class="som">${evidenzia(v.sommario, parole)}</p>` : ""}
+      <div class="corpo">
+        ${v.testo ? `<div class="testo">${evidenzia(v.testo, parole)}</div>` : `<p class="som">Testo completo non salvato per questa fonte: aprilo sul sito originale.</p>`}
+        <div class="azioni">
+          <a class="prima" href="${esc(v.url)}" target="_blank" rel="noopener">Apri originale</a>
+          ${v.testo ? '<button data-az="testo">Copia testo</button>' : ""}
+          <button data-az="cita">Copia citazione</button>
+          <button data-az="link">Copia link</button>
+        </div>
+      </div>`;
+    a.querySelector("h2").onclick = () => a.classList.toggle("aperto");
+    a.querySelectorAll("[data-az]").forEach(b => b.onclick = () => {
+      const az = b.dataset.az;
+      if (az === "testo") copia(`${v.titolo}\n\n${v.testo}\n\nFonte: ${v.fonte}, ${fmtData(v.data)} – ${v.url}`);
+      if (az === "cita") copia(`${v.testata || v.fonte}, «${v.titolo}», ${fmtData(v.data)}, ${v.url}`);
+      if (az === "link") copia(v.url);
+    });
+    frag.appendChild(a);
+  });
+  $("lista").appendChild(frag);
+  mostrate = Math.min(mostrate + PAGINA, filtrate.length);
+  $("altri").hidden = mostrate >= filtrate.length;
+}
+
+function disegnaSezioni(elenco) {
+  const box = $("sezioni"); box.innerHTML = "";
+  ["", ...elenco].forEach(s => {
+    const b = document.createElement("button");
+    b.className = "chip"; b.textContent = s || "Tutte";
+    b.setAttribute("aria-pressed", s === sezione);
+    b.onclick = () => { sezione = s; box.querySelectorAll(".chip").forEach(c => c.setAttribute("aria-pressed", c === b)); aggiornaFonti(); filtra(); };
+    box.appendChild(b);
+  });
+}
+
+function aggiornaFonti() {
+  const sel = $("fonte"), corrente = sel.value;
+  const nomi = [...new Set(tutte.filter(v => !sezione || v.sezione === sezione).map(v => v.fonte))].sort((a, b) => a.localeCompare(b, "it"));
+  sel.innerHTML = '<option value="">Tutte le fonti</option>' + nomi.map(n => `<option${n === corrente ? " selected" : ""}>${esc(n)}</option>`).join("");
+}
+
+function disegnaStato() {
+  if (!stato || !stato.fonti.length) { $("tabella").innerHTML = '<p class="vuoto">Nessun controllo ancora eseguito.</p>'; return; }
+  $("tabella").innerHTML = `<table><thead><tr><th>Fonte</th><th>Esito</th><th>In archivio</th><th>Ultima novità</th></tr></thead><tbody>${
+    stato.fonti.map(f => `<tr>
+      <td><strong>${esc(f.nome)}</strong><br><span class="agg">${esc(f.sezione)} · ${esc(f.tipo)}</span></td>
+      <td class="${f.esito === "ok" ? "ok" : "err"}">${f.esito === "ok" ? `ok · ${f.trovate} trovate` : "errore"}${f.messaggio ? `<br><span class="agg">${esc(f.messaggio)}</span>` : ""}</td>
+      <td>${f.in_archivio ?? 0}</td>
+      <td>${f.ultimo_nuovo ? fmtOra(f.ultimo_nuovo) : "—"}</td></tr>`).join("")
+  }</tbody></table>`;
+}
+
+document.querySelectorAll("nav.schede button").forEach(b => b.onclick = () => {
+  document.querySelectorAll("nav.schede button").forEach(x => x.setAttribute("aria-selected", x === b));
+  $("vista-archivio").hidden = b.dataset.vista !== "archivio";
+  $("vista-fonti").hidden = b.dataset.vista !== "fonti";
+});
+let attesa;
+$("q").addEventListener("input", () => { clearTimeout(attesa); attesa = setTimeout(filtra, 200); });
+["fonte", "periodo", "soloTesto"].forEach(id => $(id).addEventListener("change", filtra));
+$("altri").onclick = altre;
+
+(async () => {
+  try {
+    const [dati, st] = await Promise.all([
+      fetch("data.json", {cache: "no-store"}).then(r => r.json()),
+      fetch("stato.json", {cache: "no-store"}).then(r => r.json()).catch(() => null),
+    ]);
+    tutte = dati.voci || []; stato = st;
+    $("agg").textContent = dati.aggiornato ? `Aggiornato ${fmtOra(dati.aggiornato)}` : "Mai aggiornato";
+    const sez = (dati.sezioni && dati.sezioni.length) ? dati.sezioni : [...new Set(tutte.map(v => v.sezione))];
+    disegnaSezioni(sez); aggiornaFonti(); filtra(); disegnaStato();
+  } catch (e) {
+    $("agg").textContent = "Errore nel caricamento";
+    $("lista").innerHTML = '<p class="vuoto">Non riesco a leggere l\'archivio.</p>';
+  }
+})();
+</script>
+</body>
+</html>
