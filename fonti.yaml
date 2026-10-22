@@ -1,0 +1,252 @@
+# ─────────────────────────────────────────────────────────────
+#  LE TUE FONTI
+#  Per aggiungere una fonte copia un blocco e cambia i valori.
+#
+#  tipo: rss     → il sito ha un feed (indica "url" del feed)
+#  tipo: pagina  → il sito NON ha un feed: leggo la pagina dei
+#                  comunicati e prendo i link nuovi. "filtro" è
+#                  un pezzo di indirizzo che hanno tutte le notizie
+#                  (se non lo sai, lascialo vuoto: provo a capirlo da solo)
+#  tipo: google  → passo da Google News con una ricerca ("cerca")
+#                  utile per i siti che caricano le notizie in modo
+#                  dinamico o che non vogliono essere letti da programmi
+#
+#  testo: si     → salvo anche il testo completo (solo fonti
+#                  istituzionali, partiti, società: per i giornali
+#                  tengo solo titolo, sommario e link)
+# ─────────────────────────────────────────────────────────────
+
+sezioni:
+  - Istituzioni
+  - Politica
+  - Territorio
+  - Cultura
+  - Sport
+  - Stampa sarda
+  - Stampa nazionale
+
+fonti:
+
+  # ── ISTITUZIONI ────────────────────────────────────────────
+  - nome: Regione Sardegna
+    sezione: Istituzioni
+    tipo: google
+    cerca: site:regione.sardegna.it
+    testo: si
+
+  - nome: Consiglio regionale
+    sezione: Istituzioni
+    tipo: google
+    cerca: site:consiglio.regione.sardegna.it
+    testo: si
+
+  - nome: Giunta regionale (stampa)
+    sezione: Istituzioni
+    tipo: google
+    cerca: '"Giunta regionale" Sardegna delibera'
+
+  - nome: Comune di Iglesias – notizie
+    sezione: Istituzioni
+    tipo: pagina
+    url:
+      - https://www.comune.iglesias.ca.it/it/community/notizie/archivio-notizie/
+      - https://www.comune.iglesias.ca.it/it/index.html
+    filtro: /notizie/notizia/
+    testo: si
+
+  - nome: Comune di Iglesias – avvisi
+    sezione: Istituzioni
+    tipo: pagina
+    url: https://www.comune.iglesias.ca.it/it/index.html
+    filtro: /dettaglio-avviso/
+    testo: si
+
+  - nome: Comune di Carbonia
+    sezione: Istituzioni
+    tipo: google
+    cerca: '"Comune di Carbonia"'
+
+  - nome: Comune di Cagliari
+    sezione: Istituzioni
+    tipo: google
+    cerca: site:comune.cagliari.it
+    testo: si
+
+  - nome: ASL Sulcis
+    sezione: Istituzioni
+    tipo: google
+    cerca: '"Asl Sulcis"'
+
+  - nome: Università di Cagliari
+    sezione: Istituzioni
+    tipo: google
+    cerca: site:unica.it
+    testo: si
+
+  - nome: Università di Sassari
+    sezione: Istituzioni
+    tipo: google
+    cerca: site:uniss.it
+    testo: si
+
+  # ── POLITICA ───────────────────────────────────────────────
+  - nome: PD Sardegna
+    sezione: Politica
+    tipo: google
+    cerca: '"Pd" Sardegna consiglieri regionali'
+
+  - nome: Fratelli d'Italia Sardegna
+    sezione: Politica
+    tipo: google
+    cerca: '"Fratelli d''Italia" Sardegna'
+
+  - nome: M5S Sardegna
+    sezione: Politica
+    tipo: google
+    cerca: '"Movimento 5 Stelle" Sardegna'
+
+  - nome: Forza Italia Sardegna
+    sezione: Politica
+    tipo: google
+    cerca: '"Forza Italia" Sardegna'
+
+  - nome: AVS Sardegna
+    sezione: Politica
+    tipo: google
+    cerca: '"Alleanza Verdi Sinistra" Sardegna'
+
+  - nome: Partito Sardo d'Azione
+    sezione: Politica
+    tipo: google
+    cerca: '"Partito Sardo d''Azione" OR Psd''Az'
+
+  - nome: Sindacati sardi
+    sezione: Politica
+    tipo: google
+    cerca: '(Cgil OR Cisl OR Uil) Sardegna'
+
+  # ── TERRITORIO ─────────────────────────────────────────────
+  - nome: Iglesias
+    sezione: Territorio
+    tipo: google
+    cerca: Iglesias
+
+  - nome: Carbonia
+    sezione: Territorio
+    tipo: google
+    cerca: Carbonia
+
+  - nome: Sulcis
+    sezione: Territorio
+    tipo: google
+    cerca: Sulcis
+
+  # ── CULTURA ────────────────────────────────────────────────
+  - nome: Teatro Lirico di Cagliari
+    sezione: Cultura
+    tipo: google
+    cerca: '"Teatro Lirico di Cagliari"'
+
+  - nome: Sardegna Film Commission
+    sezione: Cultura
+    tipo: google
+    cerca: '"Sardegna Film Commission"'
+
+  - nome: Fondazione di Sardegna
+    sezione: Cultura
+    tipo: google
+    cerca: '"Fondazione di Sardegna"'
+
+  - nome: Cultura in Sardegna
+    sezione: Cultura
+    tipo: google
+    cerca: Sardegna mostra OR festival OR libro OR museo
+
+  # ── SPORT ──────────────────────────────────────────────────
+  - nome: Cagliari Calcio
+    sezione: Sport
+    tipo: google
+    cerca: site:cagliaricalcio.com
+    testo: si
+
+  - nome: Dinamo Sassari
+    sezione: Sport
+    tipo: google
+    cerca: '"Dinamo Sassari"'
+
+  - nome: Torres
+    sezione: Sport
+    tipo: google
+    cerca: Torres calcio Sassari
+
+  - nome: Hockey su ghiaccio Italia
+    sezione: Sport
+    tipo: google
+    cerca: '"hockey su ghiaccio"'
+
+  # ── STAMPA SARDA (solo titolo e link) ──────────────────────
+  - nome: L'Unione Sarda
+    sezione: Stampa sarda
+    tipo: google
+    cerca: site:unionesarda.it
+
+  - nome: La Nuova Sardegna
+    sezione: Stampa sarda
+    tipo: google
+    cerca: site:lanuovasardegna.it
+
+  - nome: ANSA Sardegna
+    sezione: Stampa sarda
+    tipo: google
+    cerca: site:ansa.it Sardegna
+
+  - nome: Sardinia Post
+    sezione: Stampa sarda
+    tipo: google
+    cerca: site:sardiniapost.it
+
+  - nome: Cagliaripad
+    sezione: Stampa sarda
+    tipo: google
+    cerca: site:cagliaripad.it
+
+  - nome: La Provincia del Sulcis Iglesiente
+    sezione: Stampa sarda
+    tipo: google
+    cerca: site:laprovinciadelsulcisiglesiente.com
+
+  # ── STAMPA NAZIONALE (solo titolo e link) ──────────────────
+  - nome: Corriere della Sera
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:corriere.it
+
+  - nome: la Repubblica
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:repubblica.it
+
+  - nome: Il Fatto Quotidiano
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:ilfattoquotidiano.it
+
+  - nome: Il Foglio
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:ilfoglio.it
+
+  - nome: il manifesto
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:ilmanifesto.it
+
+  - nome: il Giornale
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:ilgiornale.it
+
+  - nome: Corriere dello Sport
+    sezione: Stampa nazionale
+    tipo: google
+    cerca: site:corrieredellosport.it
