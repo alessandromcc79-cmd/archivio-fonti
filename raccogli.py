@@ -215,6 +215,9 @@ def leggi_fonte(fonte):
 
 # ── testo completo ─────────────────────────────────────────────────────────
 
+ULTIMO_ERRORE_GOOGLE = {"msg": ""}
+
+
 def risolvi_google(url):
     if "news.google.com" not in url:
         return url
@@ -223,8 +226,9 @@ def risolvi_google(url):
         esito = gnewsdecoder(url, interval=1)
         if esito.get("status") and esito.get("decoded_url"):
             return esito["decoded_url"]
-    except Exception:
-        pass
+        ULTIMO_ERRORE_GOOGLE["msg"] = str(esito.get("message") or esito)[:160]
+    except Exception as e:
+        ULTIMO_ERRORE_GOOGLE["msg"] = f"{type(e).__name__}: {e}"[:160]
     return url
 
 
@@ -310,6 +314,8 @@ def main():
             nuove = [v for v in trovate if ident(v["url"]) not in voci and v["url"] not in url_noti]
             nuove = nuove[:NUOVI_PER_FONTE]
             testi_fatti = 0
+            ULTIMO_ERRORE_GOOGLE["msg"] = ""
+            non_risolti = 0
             for v in nuove:
                 voce = {
                     "id": ident(v["url"]),
@@ -328,6 +334,8 @@ def main():
                     try:
                         vero, testo, data = testo_completo(v["url"])
                         testi_fatti += 1
+                        if "news.google.com" in vero:
+                            non_risolti += 1
                         if vero != v["url"]:
                             voce["url_originale"] = v["url"]
                             voce["url"] = vero
@@ -346,7 +354,34 @@ def main():
                     voce["data"] = voce["raccolto"]
                 voci[voce["id"]] = voce
                 url_noti.add(v["url"])
+            # recupero: voci già in archivio di fonti "testo: si" rimaste senza testo
+            if si(fonte.get("testo")):
+                mancanti = [v for v in voci.values()
+                            if v["fonte"] == nome and not v.get("testo")
+                            and v.get("tentativi", 0) < 3
+                            and not v["url"].lower().endswith(".pdf")]
+                for voce in mancanti[:max(0, TESTI_PER_FONTE - testi_fatti)]:
+                    voce["tentativi"] = voce.get("tentativi", 0) + 1
+                    try:
+                        vero, testo, data = testo_completo(voce.get("url_originale") or voce["url"])
+                        if "news.google.com" in vero:
+                            non_risolti += 1
+                        else:
+                            if vero != voce["url"]:
+                                voce.setdefault("url_originale", voce["url"])
+                                voce["url"] = vero
+                            voce["testo"] = testo
+                            if testo and not voce.get("sommario"):
+                                voce["sommario"] = pulisci(testo, SOMMARIO_MAX)
+                            if data and voce.get("data_stimata"):
+                                voce["data"], voce["data_stimata"] = data, False
+                    except Exception as e:
+                        print(f"  recupero fallito ({voce['url']}): {e}", file=sys.stderr)
+                    time.sleep(1)
             voce_stato.update(esito="ok", trovate=len(trovate), nuove=len(nuove))
+            if non_risolti:
+                voce_stato["messaggio"] = (f"Testo non letto per {non_risolti} voci: link Google non risolti"
+                                           + (f" ({ULTIMO_ERRORE_GOOGLE['msg']})" if ULTIMO_ERRORE_GOOGLE["msg"] else ""))
             if nuove:
                 voce_stato["ultimo_nuovo"] = adesso()
             totale_nuovi += len(nuove)
